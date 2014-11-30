@@ -24,6 +24,7 @@ int main() {
 	int N, min, flag, step, i, nextloc;
 	
 	while(scanf("%d", &N) && N != -1) {
+	  if (N >= 1 && N <= 64) {			
 		stack<Node> t_route;  // 树节点栈
 		step = 0;
 		memset(board, 0, sizeof(int) * 64);
@@ -78,9 +79,10 @@ int main() {
 			// 栈顶节点没有可以行走的下一位置，出栈，设为未访问
 			else  {
 				t_route.pop();
-				board[temp.x][temp.y] = 0;		   
+				board[temp.x][temp.y] = 0;	
+				step --; //路径数组下标值同步减1
 			}
-		}
+		}	
 		// output
 		if (step == 64) {
 			for( i = 0; i < 63; i++)
@@ -88,7 +90,10 @@ int main() {
 		     printf("%d\n", seq[i]);
 		}	
 		else
-			printf("-1\n");
+			printf("-1\n");	   
+	  } // end of if (判断起始位置是否合法）
+	   else
+		   printf("-1\n");
     }
 	return 0;
 }
